@@ -1,0 +1,19 @@
+<header>
+<h1>Books</h1>
+</header>
+
+<main>
+<table class="table">
+   <tr>
+   	<th>image</th>
+　　 <th>name</th>
+　　 <th> </th>
+   </tr>
+   <% @users.each do |user| %>
+    <tr>
+     <td>画像</td>
+     <td><%= user.name %></td>
+　　  <td><%= link_to "show", user_path(user.id) %></td>
+    </tr>
+   <% end %>
+</table>

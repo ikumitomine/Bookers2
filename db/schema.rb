@@ -9,8 +9,16 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended that you check this file into your version control system.
+rails s -b 0.0.0.0
+ActiveRecord::Schema.define(version: 2020_08_29_015546) do
 
-ActiveRecord::Schema.define(version: 2020_08_28_072522) do
+  create_table "books", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false

@@ -1,0 +1,19 @@
+<% if flash[:notice] %>
+    <p class="notice"><%= flash[:notice] %></p>
+  <% end %>
+  <% if flash[:notice_e] %>
+    <p class="notice"><%= flash[:notice_e] %></p>
+<% end %>
+
+<div class="show">
+    <h1>Book detail</h1>
+    <table width="100%">
+      <tr>
+        <td><%= @book.user.name %></td>
+        <td><p class="text"><%= @book.title %></p></td>
+        <td><p class="text"><%= @book.body %></p></td>
+        <% if @book.user == current_user %>
+        　　<td><%= link_to "Edit", edit_book_path(@book) %></td>
+       　　 <td><%= link_to "Destroy", book_path(@book),method: :delete,"data-confirm" => "本当に消しますか？" %></td>
+       <% end %>
+</div>
