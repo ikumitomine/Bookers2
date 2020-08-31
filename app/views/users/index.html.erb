@@ -1,7 +1,12 @@
-<header>
-<h1>Books</h1>
-</header>
+<h1>User info</h1>
+<%= attachment_image_tag current_user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg"%>
+<table>
+  <tr align="left"><th>name</th><td><%= current_user.name %></td></tr>
+  <tr align="left"><th>introduction</th><td><%= current_user.introduction %></td></tr>
+</table>
+<%= link_to "edit", edit_user_path(current_user.id) %>
 
+<h1>Users</h1>
 <main>
 <table class="table">
    <tr>
@@ -11,7 +16,7 @@
    </tr>
    <% @users.each do |user| %>
     <tr>
-     <td>画像</td>
+     <td><%= attachment_image_tag user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg"%></td>
      <td><%= user.name %></td>
 　　  <td><%= link_to "show", user_path(user.id) %></td>
     </tr>

@@ -17,11 +17,15 @@
       <li class=""><%= link_to 'Books', books_path %></li>
       <li class=""><%= link_to "logout", destroy_user_session_path, method: :delete %></li>
     <% else %>
-      <li class="">Home</li>
-      <li class="">About</li>
+      <li class=""><%= link_to "Home", root_path %></li>
+      <li class=""><%= link_to "About", home_path %>About</li>
       <li class=""><%= link_to "sign up", new_user_registration_path %></li>
       <li class=""><%= link_to "login", new_user_session_path %></li>
     <% end %>
     <%= yield %>
   </body>
+
+  <footer>
+    <p>CopyRight Infratop.inc</p>
+  </footer>
 </html>

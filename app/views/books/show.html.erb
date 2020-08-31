@@ -5,15 +5,17 @@
     <p class="notice"><%= flash[:notice_e] %></p>
 <% end %>
 
-<div class="show">
     <h1>Book detail</h1>
     <table width="100%">
       <tr>
-        <td><%= @book.user.name %></td>
+        <td>
+          <%= attachment_image_tag @book.user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg"%><br><%= @book.user.name %>
+       </td>
         <td><p class="text"><%= @book.title %></p></td>
         <td><p class="text"><%= @book.body %></p></td>
         <% if @book.user == current_user %>
         　　<td><%= link_to "Edit", edit_book_path(@book) %></td>
        　　 <td><%= link_to "Destroy", book_path(@book),method: :delete,"data-confirm" => "本当に消しますか？" %></td>
        <% end %>
-</div>
+     </tr>
+   </table>
