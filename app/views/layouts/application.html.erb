@@ -18,7 +18,7 @@
       <li class=""><%= link_to "logout", destroy_user_session_path, method: :delete %></li>
     <% else %>
       <li class=""><%= link_to "Home", root_path %></li>
-      <li class=""><%= link_to "About", home_path %>About</li>
+      <li class=""><%= link_to "About", home_path %></li>
       <li class=""><%= link_to "sign up", new_user_registration_path %></li>
       <li class=""><%= link_to "login", new_user_session_path %></li>
     <% end %>
