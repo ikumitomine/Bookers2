@@ -1,44 +1,37 @@
 <!--Home-->
-<% if flash[:notice_e] %>
-    <p class="notice"><%= flash[:notice_e] %></p>
-<% end %>
-
-<h1>User info</h1>
-<% if @user.id == current_user.id %>
-      <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg"%>
-	　<table>
-  		<tr align="left"><th>name</th><td><%= current_user.name %></td></tr>
-  		<tr align="left"><th>introduction</th><td><%= current_user.introduction %></td></tr>
-	　</table>
-	　<%= link_to "edit", edit_user_path(@user.id) %>
-<% else %>
-	　<%= attachment_image_tag @user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg"%>
-	　<table>
-  		<tr align="left"><th>name</th><td><%= @user.name %></td></tr>
-  		<tr align="left"><th>introduction</th><td><%= @user.introduction %></td></tr>
-	　</table>
-	　<%= link_to "edit", user_path(current_user.id) %>
-<% end %>
-
-<h1>Books</h1>
-<main>
-<table>
-   <tr>
-   	<th> </th>
-　　 <th>Title</th>
-　　 <th>Opinion</th>
-   </tr>
-   <% @books.each do |book| %>
-    <tr>
-      <td>
-         <%= link_to user_path(@user.id) do %>
-          <%= attachment_image_tag @user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg"%>
-         <% end %>
-        </td>
-　　   <td><%= link_to "book.title", book_path(book.id) %></td>
-	    <td><%= book.body %></td>
-    </tr>
-   <% end %>
-</table>
-
-<%= render partial: 'books/new', locals: { book: @book } %>
+<body>
+<div class="container">
+  <% if flash[:notice_e] %><p class="notice"><%= flash[:notice_e] %></p><% end %>
+  <div class="row">
+    　<div class="col-xs-3 sidebar">
+      　　<%= render partial: 'users/s_user_info', locals: { user: @user} %>
+     　　　<%= render partial: 'books/new', locals: { book: @book } %>
+     </div>
+     <div class="col-xs-9">
+      　　<h2>Books</h2>
+         <table class="table table-hover">
+           <thead>
+             <tr>
+   	           <th> </th>
+　　            <th>Title</th>
+　　            <th>Opinion</th>
+             </tr>
+         　 </thead>
+         　 <% @books.each do |book| %>
+            　<tbody>
+              <tr>
+                <td>
+                  <%= link_to user_path(@user.id) do %>
+                    <%= attachment_image_tag @user, :profile_image, :fill, 50, 50, fallback: "no_image.jpg" ,size:'40x40' %>
+                  <% end %>
+                </td>
+　　             <td><%= link_to "book.title", book_path(book.id) %></td>
+	              <td><%= book.body %></td>
+           　 </tr>
+          　</tbody>
+         　<% end %>
+      　 </table>
+     </div>
+  </div>
+</div>
+</body>
