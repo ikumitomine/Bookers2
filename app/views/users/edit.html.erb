@@ -1,20 +1,25 @@
 <!--プロフィールediting-->
-<h1>User info edit</h1>
+<div class="container">
+    <div class="user-info">
+        <h2>User info</h2>
 
-<% if @user.errors.any? %>
- <div class="error">
-    <h3 class="error-message"><%= @user.errors.count %>errors prohibited this obj from being saved:</h3>
-   　 <ul>
-    　<% @user.errors.full_messages.each do |message| %>
-       <li class="message-list"><%= message %></li>
-      <% end %>
-      </ul>
-  <% end %>
+        <div class="error-message">
+            <% if @user.errors.any? %>
+                <h3><%= @user.errors.count %>errors prohibited this obj from being saved:</h3>
+                <ul>
+    	           <% @user.errors.full_messages.each do |message| %>
+    	               <li class="message-list"><%= message %></li>
+                    <% end %>
+                </ul>
+            <% end %>
+        </div>
 
-<%= form_for(@user) do |f| %>
-    <label>Name</label><%= f.text_field :name, autofocus: true %><br>
-    <label>Image</label><br>
-    <%= f.attachment_field :profile_image, placeholder: "選択されていません" %><br>
-    <label>Introduction</label><%= f.text_area :introduction, autofocus: true %><br>
-    <%= f.submit "Update User" %>
-<% end %>
+        <%= form_for(@user) do |f| %>
+            <label>Name</label><%= f.text_field :name, autofocus: true %><br>
+            <label>Image</label><br>
+            <%= f.attachment_field :profile_image, placeholder: "選択されていません" %><br>
+            <label>Introduction</label><%= f.text_area :introduction, autofocus: true %><br>
+            <%= f.submit "Update User" %>
+        <% end %>
+    </div>
+</div>

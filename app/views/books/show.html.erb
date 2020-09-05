@@ -1,9 +1,6 @@
 <!--User→show→title→useridのBookdetail-->
 <body>
   <div class="container">
-    <% if flash[:notice] %><p><%= flash[:notice] %></p><% end %>
-    <% if flash[:notice_e] %><p><%= flash[:notice_e] %></p><% end %>
-
     <div class="row indexbody">
       <div class="col-xs-3 sidebar">
         <%= render partial: 'users/s_user_info', locals: { user: @user} %>
@@ -11,23 +8,32 @@
       </div>
       <div class="col-xs-9 indexbody">
         <h2>Book detail</h2>
-          <table class="table table-hover">
-           <tbody>
+        <table class="table table-hover">
+          <tbody>
             <tr>
               <td>
-                <%= attachment_image_tag @book.user, :profile_image, :fill, 50, 50, fallback: "no_image.jpg", size:'40x40'%><br>
+                <%= attachment_image_tag @book.user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg", size:'100x100'%><br>
                 <%= link_to @user.name ,user_path(@user.id) %>
               </td>
               <td><%= @book.title %></td>
               <td><%= @book.body %></td>
-               <% if @book.user == current_user %>
-               <div class="edit"><td><%= link_to "Edit", edit_book_path(@book) %></td></div>
-       　　       <td><%= link_to "Destroy", book_path(@book),method: :delete,"data-confirm" => "本当に消しますか？" %></td>
-               <% end %>
+                <% if @book.user == current_user %>
+                  <td>
+                    <%= link_to edit_book_path(@book) do %>
+                      <button type="button" class="btn btn-success">Edit</button>
+                    <% end %>
+                  </td>
+                  </td>
+       　　        <td>
+                    <%= link_to book_path(@book),method: :delete,"data-confirm" => "本当に消しますか？" do %>
+                      <button type="botton" class="btn btn-danger">Destroy</button>
+                    <% end %>
+                <% end %>
+              </td>
             </tr>
-           </tbody>
-          </table>
+          </tbody>s
+        </table>
       </div>
     </div>
- </div>
+  </div>
 </body>

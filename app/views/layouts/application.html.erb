@@ -51,7 +51,7 @@
           </li>
 
           <li>
-            <%= link_to home_path do %>
+            <%= link_to home_about_path do %>
               <span class="glyphicon glyphicon-link" aria-hidden="true">  About</span>
             <% end %>
           </li>
@@ -73,9 +73,13 @@
      </div>
    </div>
  </header>
+
+<div class="notice-1">
  <% flash.each do |key, value| %>
     <%= content_tag(:div, value, class: "#{key}") %>
  <% end %>
+</div>
+
  <%= yield %>
 
  <footer class="footer">
