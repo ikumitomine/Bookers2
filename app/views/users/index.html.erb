@@ -3,9 +3,11 @@
   <div class="container">
     <div class="row indexbody">
       <div class="col-xs-3 sidebar">
-      	<%= render partial: 'users/i_user_info' %>
+        <h2>User info</h2>
+      	<%= render 'users/user_info', user: current_user %>
           <div class="indexnew">
-      	     <%= render partial: 'books/new', locals: { book: @book } %>
+            <h2>New book</h2>
+      	     <%= render 'books/new', book: @book %>
           </div>
       </div>
 
@@ -17,6 +19,9 @@
    	 			    <th>image</th>
               <th>name</th>
               <th> </th>
+              <th> </th>
+              <th> </th>
+              <th> </th>
             </tr>
           </thead>
           <tbody>
@@ -24,6 +29,15 @@
    			      <tr>
                 <td><%= attachment_image_tag user, :profile_image, :fill, 50, 50, fallback: "no_image.jpg", size:'40x40' %></td>
                 <td><%= user.name %></td>
+                <td>フォロー数：<%= user.follower.count %></td>
+                <td>フォロワー数：<%= user.followed.count %></td>
+                <td>
+                  <% if current_user.following?(user) %>
+                    <%= link_to 'フォロー外す', unfollow_path(user.id), method: :post %>
+                  <% else %>
+                    <%= link_to 'フォローする', follow_path(user.id), method: :post %>
+                  <% end %>
+                </td>
 　　   			    <td><%= link_to "Show", user_path(user.id) %></td>
     		      </tr>
             <% end %>

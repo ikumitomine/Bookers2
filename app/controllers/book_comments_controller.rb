@@ -3,7 +3,9 @@ class BookCommentsController < ApplicationController
 		@book = Book.find(params[:book_id])
 		comment = current_user.book_comments.new(book_comment_params)
 		comment.book_id = @book.id
-		comment.save
+		if comment.save
+			flash[:success] = "Comment was successfully created"
+		end
 		redirect_back(fallback_location: root_path)
 	end
 

@@ -3,8 +3,10 @@
   <div class="container">
     <div class="row indexbody">
       <div class="col-xs-3 sidebar">
-        <%= render partial: 'users/s_user_info', locals: { user: @user} %>
-     　　<%= render partial: 'books/new', locals: { book: @book } %>
+        <h2>User info</h2>
+        <%= render 'users/user_info', user: @user %>
+        <h2>New book</h2>
+     　　<%= render 'books/new', book: @book %>
       </div>
       <div class="col-xs-9 index">
         <h2>Books</h2>
@@ -43,9 +45,7 @@
                     <% end %>
                   <% end %>
                 </td>
-                <td>
-                  <p>コメント数：<%= @book.book_comments.count %></p>
-                </td>
+                <td>コメント数：<%= book.book_comments.count %></td>
                 </tr>
               <% end %>
             </tbody>
