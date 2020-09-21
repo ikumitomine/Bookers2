@@ -74,7 +74,6 @@
      </div>
    </header>
 <!--検索機能-->
-
   <div class="row">
     <div class="col-md-4 col-md-offset-4 search">
       <% if user_signed_in? %>
@@ -83,6 +82,7 @@
           <%= select_tag(:option, options_for_select([["User","1"],["Book","2"]])) %>
           <%= select_tag(:search_method, options_for_select([["完全一致","perfect_match"],["前方一致","forward_match"],["後方一致","backward"],["部分一致","pertial_match"]])) %>
           <%= submit_tag "検索" %>
+          <!-- select_tag([プロパティ名], options_for_select([["ブラウザに表示させたい文字","送られてくる値"],["２番目のブラウザに表示させたい文字","送られてくる値"]])) -->
         <% end %>
       <% end %>
     </div>

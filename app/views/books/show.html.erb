@@ -31,43 +31,24 @@
                     <% end %>
                   </td>
                 <% end %>
+                <!--いいね-->
                 <td>
-                  <% if @book.favorited_by?(current_user) %>
-                    <%= link_to book_favorites_path(@book), method: :delete do %>
-                      <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-                      <%= @book.favorites.count %>
-                    <% end %>
-                  <% else %>
-                    <%= link_to book_favorites_path(@book), method: :post do %>
-                      <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
-                      <%= @book.favorites.count %>
-                    <% end %>
-                  <% end %>
+                  <div id="favorites_buttons_<%= @book.id %>">
+                    <%= render partial: 'favorites/favorite', locals: { book: @book} %>
+                  </div>
                 </td>
+                <!--いいね-->
                 <td>コメント数：<%= @book.book_comments.count %></td>
             </tr>
           </tbody>
         </table>
-      <!--コメント一覧-->
-        <table>
-          <% @book.book_comments.each do |book_comment| %>
-            <tr>
-              <td>
-                <%= attachment_image_tag book_comment.user, :profile_image, :fill, 50, 50, fallback: "no_image.jpg", size:'50x50'%><br>
-                <%= book_comment.user.name %>
-              </td>
-              <td><%= book_comment.comment %></td>
-              <% if book_comment.user == current_user %>
-                <td>
-                  <%= link_to 'Destroy', book_book_comment_path(book_comment.book, book_comment), class: "btn btn-danger", method: :delete %>
-                </td>
-              <% end %>
-            </tr>
-          <% end %>
+        <table class='table table-hover' id="comment_box">
+        <!--コメント一覧-->
+        <%= render 'comments', book_comments: @book_comments %>
         </table>
         <!--コメント入力フォーム-->
-        <%= form_for [@book, @book_comment] do |f| %>
-          <%= f.text_area :comment, size: "90x5" %>
+        <%= form_with(model: [@book, @book_comment], remote: true) do |f| %>
+          <%= f.text_area :comment, size: "90x5", id: 'comment_body' %>
           <%= f.submit "送信" %>
         <% end %>
       </div>

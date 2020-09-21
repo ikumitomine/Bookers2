@@ -11,16 +11,14 @@ class Book < ApplicationRecord
 
 	def Book.search(search, search_method, user_or_book)
 	    if user_or_book == "2"
-	      if search_method == "forward_match"
-	        @books = Book.where("body LIKE?","#{search}%")
+	      if search_method == "perfect_match"
+	        @books = Book.where(title: "#{search}")
+	      elsif search_method == "forward_match"
+	        @books = Book.where("title LIKE?","#{search}%")
 	      elsif search_method == "backward_match"
-	        @books = Book.where("body LIKE?","%#{search}")
-	      elsif search_method == "perfect_match"
-	        @books = Book.where(body: "#{search}")
-	      elsif search_method == "pertial_match"
-	        @books = Book.where("body LIKE?","%#{search}%")
-	      else
-	        @books = Book.all
+	        @books = Book.where("title LIKE?","%#{search}")
+	      else search_method == "pertial_match"
+	        @books = Book.where("title LIKE?","%#{search}%")
 	      end
 	    end
  	end

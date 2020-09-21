@@ -26,6 +26,7 @@ class BooksController < ApplicationController
 		@user = @book.user
 		@book_n = Book.new
 		@book_comment = BookComment.new
+		@book_comments = @book.book_comments.includes(:user)
 	end
 
 	def edit

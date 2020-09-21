@@ -31,19 +31,16 @@ class User < ApplicationRecord
 
   def User.search(search, search_method, user_or_book)
     if user_or_book == "1"
-      if search_method == "forward_match"
+      if search_method == "perfect_match"
+        @users = User.where(name: "#{search}")
+      elsif search_method == "forward_match"
         @users = User.where("name LIKE?","#{search}%")
       elsif search_method == "backward_match"
         @users = User.where("name LIKE?","%#{search}")
-      elsif search_method == "perfect_match"
-        @users = User.where(name: "#{search}")
-      elsif search_method == "pertial_match"
-        @users = User.where("name LIKE?","%#{search}%")
       else
-        @users = User.all
+        @users = User.where("name LIKE?","%#{search}%")
       end
     end
   end
-
 
 end
