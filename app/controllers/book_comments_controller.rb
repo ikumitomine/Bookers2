@@ -7,12 +7,12 @@ class BookCommentsController < ApplicationController
 		if comment.save
 			flash[:success] = "Comment was successfully created"
 		end
-		# render :index
 	end
 
 	def destroy
-		BookComment.find_by(id: params[:id], book_id: params[:book_id]).destroy
-		# render :index
+		@book = Book.find(params[:book_id])
+		@book_comment = BookComment.find_by(id: params[:id], book_id: params[:book_id]).destroy
+		@book_comments = @book.book_comments
 	end
 
 	private
